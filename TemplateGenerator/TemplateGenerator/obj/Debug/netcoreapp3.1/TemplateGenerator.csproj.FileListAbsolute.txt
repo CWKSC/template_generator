@@ -1,0 +1,13 @@
+D:\User\Develop\GitHub\TemplateGenerator\TemplateGenerator\TemplateGenerator\bin\Debug\netcoreapp3.1\TemplateGenerator.exe
+D:\User\Develop\GitHub\TemplateGenerator\TemplateGenerator\TemplateGenerator\bin\Debug\netcoreapp3.1\TemplateGenerator.deps.json
+D:\User\Develop\GitHub\TemplateGenerator\TemplateGenerator\TemplateGenerator\bin\Debug\netcoreapp3.1\TemplateGenerator.runtimeconfig.json
+D:\User\Develop\GitHub\TemplateGenerator\TemplateGenerator\TemplateGenerator\bin\Debug\netcoreapp3.1\TemplateGenerator.runtimeconfig.dev.json
+D:\User\Develop\GitHub\TemplateGenerator\TemplateGenerator\TemplateGenerator\bin\Debug\netcoreapp3.1\TemplateGenerator.dll
+D:\User\Develop\GitHub\TemplateGenerator\TemplateGenerator\TemplateGenerator\bin\Debug\netcoreapp3.1\TemplateGenerator.pdb
+D:\User\Develop\GitHub\TemplateGenerator\TemplateGenerator\TemplateGenerator\obj\Debug\netcoreapp3.1\TemplateGenerator.csprojAssemblyReference.cache
+D:\User\Develop\GitHub\TemplateGenerator\TemplateGenerator\TemplateGenerator\obj\Debug\netcoreapp3.1\TemplateGenerator.AssemblyInfoInputs.cache
+D:\User\Develop\GitHub\TemplateGenerator\TemplateGenerator\TemplateGenerator\obj\Debug\netcoreapp3.1\TemplateGenerator.AssemblyInfo.cs
+D:\User\Develop\GitHub\TemplateGenerator\TemplateGenerator\TemplateGenerator\obj\Debug\netcoreapp3.1\TemplateGenerator.csproj.CoreCompileInputs.cache
+D:\User\Develop\GitHub\TemplateGenerator\TemplateGenerator\TemplateGenerator\obj\Debug\netcoreapp3.1\TemplateGenerator.dll
+D:\User\Develop\GitHub\TemplateGenerator\TemplateGenerator\TemplateGenerator\obj\Debug\netcoreapp3.1\TemplateGenerator.pdb
+D:\User\Develop\GitHub\TemplateGenerator\TemplateGenerator\TemplateGenerator\obj\Debug\netcoreapp3.1\TemplateGenerator.genruntimeconfig.cache
