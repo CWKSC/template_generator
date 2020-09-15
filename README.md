@@ -2,9 +2,9 @@
 
 Template Generator for generate code
 
-Combine generate the possible combinations of all sets
+Generate all possible combinations of sets
 
-Cooperate with Some String process method will be powerful
+It will be useful to cooperate with some string processing functions
 
 This is part of [CWKSC/MyLib_Csharp](https://github.com/CWKSC/MyLib_Csharp) C# library 
 
