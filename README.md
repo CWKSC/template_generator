@@ -1,5 +1,7 @@
 # TemplateGenerator
 
+This is part of CWKSC/MyLib_Csharp C# library, separate repo for focusing.
+
 The main function is to generate all possible set combinations. For example:
 
 
@@ -15,14 +17,6 @@ Generate(template, set0, set1)
 ```
 
 It will be useful to cooperate with some string processing functions
-
-This is part of [CWKSC/MyLib_Csharp](https://github.com/CWKSC/MyLib_Csharp) C# library 
-
-If you include this library, its functionality is already included
-
-Note that there are some extension methods for printing on Demo
-
-For example: `"42".Print() == Console.Write("42")`, `"42".Printlnln() == Console.WriteLine("42" + "\n");`
 
 ### Basic Usage
 
