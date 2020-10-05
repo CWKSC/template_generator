@@ -1,14 +1,24 @@
 # TemplateGenerator
 
-Template Generator for generate code
+The main function is to generate all possible set combinations. For example:
 
-Generate all possible combinations of sets
+
+```c#
+// string Generate(string template, params string[][] set) //
+string template = "<0> <1>";
+
+string[] set0 = { "x", "y" };
+string[] set1 = { "1", "2", "3" };
+
+Generate(template, set0, set1)
+// {"x 1", "x 2", "x 3", "y 1", "y 2", "y 3"}
+```
 
 It will be useful to cooperate with some string processing functions
 
 This is part of [CWKSC/MyLib_Csharp](https://github.com/CWKSC/MyLib_Csharp) C# library 
 
-If you already include this library, its functionality is already included
+If you include this library, its functionality is already included
 
 Note that there are some extension methods for printing on Demo
 
