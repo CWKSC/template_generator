@@ -1,11 +1,10 @@
 # TemplateGenerator
 
-This is part of CWKSC/MyLib_Csharp C# library, separate repo for focusing.
+This is part of [CWKSC/MyLib_Csharp](https://github.com/CWKSC/MyLib_Csharp) C# library, separate repo for focusing.
 
 The main function is to generate all possible set combinations. For example:
 
-
-```c#
+```csharp
 // string Generate(string template, params string[][] set) //
 string template = "<0> <1>";
 
@@ -21,14 +20,14 @@ It will be useful to cooperate with some string processing functions
 ### Basic Usage
 
 ```c#
-// string Generate(string template, params string[][] set) //
+// string[] Generate(string template, params string[][] set) //
 string template = "<0> <1> <2>\n";
 
 string[] set0 = { "12", "34" };
 string[] set1 = { "xx", "yy", "zz" };
 string[] set2 = { "aa", "bb", "cc", "dd" };
 
-Generate(template, set0, set1, set2).Println();
+Generate(template, set0, set1, set2).ConcatToOneString().Println();
 ```
 
 #### Output:
@@ -63,8 +62,8 @@ Generate(template, set0, set1, set2).Println();
 ### GenerateByGroup
 
 ```csharp
-// string GenerateByGroup(string template, params string[][][] groups) //
-string template_group = "<0_0> <0_1> <1_0>\n";
+// string[] GenerateByGroup(string template, params string[][][] groups) //
+string template = "<0_0> <0_1> <1_0>\n";
 
 string[] group0_set0 = { "12", "34", "56" };
 string[] group0_set1 = { "xx", "yy", "zz" };
@@ -72,7 +71,7 @@ string[] group1_set0 = { "aa", "bb", "cc", "dd" };
 string[][] group0 = { group0_set0, group0_set1 };
 string[][] group1 = { group1_set0 };
 
-GenerateByGroup(template_group, group0, group1).Println();
+GenerateByGroup(template, group0, group1).ConcatToOneString().Println();
 ```
 
 #### Output:
@@ -92,49 +91,52 @@ GenerateByGroup(template_group, group0, group1).Println();
 56 zz dd
 ```
 
-### Another example of GenerateByGroup
+### GenerateByGroup - CartesianToPolar
 
 ```csharp
+// string[] GenerateByGroup(string template, params string[][][] groups) //
 string template =
-@"public static double CartesianToPolar_<1_0>(<0_0>) {
-double result = Math.Atan2(<0_1>);
-return (result < 0 ? result + TwoPI : result) * <1_1>;
+    @"public static double CartesianToPolar_<1_0>(<0_0>) {
+    double result = Math.Atan2(<0_1>);
+    return (result < 0 ? result + TwoPI : result) * <1_1>;
 }
 ";
 
 // Group0 set //
 string[] group0_set0_parameter_args = {
-	"double x, double y",
-	"Vector2 point",
-	"List<double> list" };
+    "double x, double y",
+    "Vector2 point",
+    "List<double> list"
+};
 string[] group0_set1_ATan2_input_parameter = {
-	"y, x",
-	"point.Y, point.X",
-	"list[1], list[0]" };
+    "y, x",
+    "point.Y, point.X",
+    "list[1], list[0]"
+};
 
 // Group1 set //
 string[] group1_set0_type = {
-	"Radians",
-	"Degrees",
-	"Gradians"
+    "Radians",
+    "Degrees",
+    "Gradians"
 };
 string[] group1_set1_convert = {
-	"1",
-	"RadToDeg",
-	"RadToGrad"
+    "1",
+    "RadToDeg",
+    "RadToGrad"
 };
 
 // Group //
 string[][] group0 = {
-	group0_set0_parameter_args,
-	group0_set1_ATan2_input_parameter
+    group0_set0_parameter_args,
+    group0_set1_ATan2_input_parameter
 };
 string[][] group1 = {
-	group1_set0_type,
-	group1_set1_convert
+    group1_set0_type,
+    group1_set1_convert
 };
 
-GenerateByGroup(template, group0, group1).Printlnln();
+GenerateByGroup(template, group0, group1).ConcatToOneString().Printlnln();
 ```
 
 #### Output:
@@ -181,14 +183,14 @@ public static double CartesianToPolar_Gradians(List<double> list) {
 ### GenerateByName
 
 ```csharp
-// GenerateByName //
-string template_byName = "<type> <varname><suffix>;\n";
+// string[] GenerateByName(string template, params (string name, string[] set)[] sets) //
+string template = "<type> <varname><suffix>;\n";
 
 (string, string[]) typeSet = ("type", new string[] { "int", "string", "bool", "double" });
 (string, string[]) varnameSet = ("varname", new string[] { "x", "y", "z" });
 (string, string[]) suffixSet = ("suffix", new string[] { "1", "2", "3" });
 
-GenerateByName(template_byName, typeSet, varnameSet, suffixSet).Printlnln();
+GenerateByName(template, typeSet, varnameSet, suffixSet).ConcatToOneString().Printlnln();
 ```
 
 #### Output:
@@ -232,24 +234,98 @@ double z2;
 double z3;
 ```
 
-### GenerateByName generate generic class
+### GenerateByNameAndGroup - Generate Generic Class
 
 ```csharp
-// GenerateByName generate generic class //
-string template_byName2 = "class Box<<generic>> { }\n";
+// string[] GenerateByNameAndGroup(string template, params (string name, string[] set)[][] groups) //
+// Generate generic class //
+string template = "class Box<<generic>> {\n<member>\n}\n";
 
-(string, string[]) genericSet = ("generic", "T".ToConcatUpperTriangular_SeparateBy(5, ", "));
+(string, string[]) genericSet = ("generic",
+                                 GenericType(5)
+                                 .ToConcat1dArray_SeparateBy(", "));
 
-GenerateByName(template_byName2, genericSet).Printlnln();
+(string, string[]) memberSet = ("member",
+                                GenericType(5)
+                                .AllAdd(" ")
+                                .Mix(Xn("t", 5))
+                                .AllAdd(";")
+                                .AllAddFront("    ")
+                                .ToConcat1dArray_SeparateBy("\n"));
+
+(string, string[])[] group = { genericSet, memberSet };
+
+GenerateByNameAndGroup(template, group).ConcatToOneString().Printlnln();
 ```
 
 #### Output:
 
 ```csharp
-class Box<T> { }
-class Box<T, T> { }
-class Box<T, T, T> { }
-class Box<T, T, T, T> { }
-class Box<T, T, T, T, T> { }
+class Box<T0> {
+    T0 t0;
+}
+class Box<T0, T1> {
+    T0 t0;
+    T1 t1;
+}
+class Box<T0, T1, T2> {
+    T0 t0;
+    T1 t1;
+    T2 t2;
+}
+class Box<T0, T1, T2, T3> {
+    T0 t0;
+    T1 t1;
+    T2 t2;
+    T3 t3;
+}
+class Box<T0, T1, T2, T3, T4> {
+    T0 t0;
+    T1 t1;
+    T2 t2;
+    T3 t3;
+    T4 t4;
+}
+```
+
+### GenerateByNameAndGroup - Generate Generic Method
+
+```csharp
+// string[] GenerateByNameAndGroup(string template, params (string name, string[] set)[][] groups) //
+// Generate generic method //
+string template = "public static T Add<T>(<genericVar>) { return <returnValue>; }\n";
+
+string[] var = { "a", "b", "c", "d", "e" };
+
+(string, string[]) genericVarSet = ("genericVar",
+                                    "T ".ToRepeatArray(5)
+                                    .Mix(var)
+                                    .ToConcat1dArray_SeparateBy(", "));
+// T a
+// T a, T b
+// T a, T b, T c
+// T a, T b, T c, T d
+// T a, T b, T c, T d, T e
+
+(string, string[]) returnValueSet = ("returnValue", var.ToConcat1dArray_SeparateBy(" + "));
+// a
+// a + b
+// a + b + c
+// a + b + c + d
+// a + b + c + d + e
+
+(string, string[])[] group = { genericVarSet, returnValueSet };
+
+GenerateByNameAndGroup(template, group).ConcatToOneString().Printlnln();
+```
+
+#### Output:
+
+```csharp
+public static T Add<T>(T a) { return a; }
+public static T Add<T>(T a, T b) { return a + b; }
+public static T Add<T>(T a, T b, T c) { return a + b + c; }
+public static T Add<T>(T a, T b, T c, T d) { return a + b + c + d; }
+public static T Add<T>(T a, T b, T c, T d, T e) { return a + b + c + d + e; }
 ```
 
